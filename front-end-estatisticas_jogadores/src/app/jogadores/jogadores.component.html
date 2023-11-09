@@ -1,0 +1,11 @@
+<h1>Stephen Curry - NBA</h1>
+<button (click)="listaEstatisticasJogador('Stephen Curry')">Exibir Estatísticas de Stephen Curry</button>
+<div *ngIf="playerStats">{{ playerStats }}</div>
+
+<h1>Neymar - Futebol</h1>
+<button (click)="listaEstatisticasJogador('Neymar')">Exibir Estatísticas de Neymar</button>
+<div *ngIf="playerStats">{{ playerStats }}</div>
+
+<h2>Cadastro</h2>
+<input [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">
+<button (click)="adicionaJogador()">Cadastrar</button>

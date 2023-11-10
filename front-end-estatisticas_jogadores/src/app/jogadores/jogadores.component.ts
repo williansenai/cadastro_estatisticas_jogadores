@@ -15,6 +15,9 @@ export class JogadoresComponent implements OnInit {
   jogadoresEstatisticas: any;
   jogadorEstatistica: any;
   marcas: any;
+  mostrarCadastrarJogador = false;
+
+  
 
   constructor(private compartilhamentoService: CompartilhamentoService) { }
  
@@ -27,11 +30,27 @@ export class JogadoresComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.jogadoresEstatisticas = res;
+          this.jogadorEstatistica = false;
+          this.mostrarCadastrarJogador = false;
         },
         error: (error) => {
           console.error('Erro ao obter estatísticas de todos os jogadores:', error);
         }
       });
+  }
+
+  pesquisarJogadorEspecifico()
+  {
+    this.mostrarCadastrarJogador = false;
+    this.jogadoresEstatisticas = false;
+    this.jogadorEstatistica = true;
+  }
+
+  cadastrarNovoJogador()
+  {
+    this.jogadoresEstatisticas = false;
+    this.jogadorEstatistica = false;
+    this.mostrarCadastrarJogador = true;
   }
 
   buscarEstatisticasJogador() {

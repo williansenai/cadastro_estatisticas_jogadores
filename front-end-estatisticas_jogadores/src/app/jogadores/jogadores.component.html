@@ -1,70 +1,90 @@
-<div class="container-custom">
-  <h2>Listagem de Estatísticas de Jogadores</h2>
-  <button class="btn btn-primary btn-custom" (click)="listaEstatisticasTodosJogadores()">Exibir Estatísticas de Todos os Jogadores</button>
-
-  <table *ngIf="jogadoresEstatisticas" class="table table-striped">  
-    <thead>
-      <tr>
-        <th>Jogador</th>
-        <th>Sport</th>
-        <th>Estatísticas</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let jogadores of jogadoresEstatisticas"> 
-        <td>{{ jogadores.nome }}</td>
-        <td>{{ jogadores.sport }}</td>
-        <td>{{ jogadores.stats }}</td>                
-      </tr>
-    </tbody>
-  </table>
-
-  <h2>Buscar Estatísticas de Jogador</h2>
+<div class="container-custom">  
+  
   <div class="row">
-    <div class="col-md-4 form-group">      
-      <input id="nomeJogador" [(ngModel)]="pesquisaJogador" class="form-control" placeholder="Digite o nome do jogador">
-    </div>
-    <div class="col-md-1 form-group">
-      <button class="btn btn-primary btn-search" (click)="buscarEstatisticasJogador()">Buscar</button>
-    </div>
+    <div class="col-md-2 form-group">  
+      <button class="btn btn-primary btn-custom" (click)="listaEstatisticasTodosJogadores()">Exibir Estatísticas de Todos os Jogadores</button>
+    </div>  
+    <div class="col-md-2 form-group">  
+      <button class="btn btn-primary btn-custom" (click)="pesquisarJogadorEspecifico()">Pesquisar um Jogador</button>
+    </div>  
+    <div class="col-md-2 form-group">  
+      <button class="btn btn-primary btn-custom" (click)="cadastrarNovoJogador()">Cadastrar um Jogador</button>
+    </div>      
   </div>
+  
+  <div *ngIf="jogadoresEstatisticas">
+    <h2>Listagem de Estatísticas de Jogadores</h2>
+    <table class="table table-striped">  
+      <thead>
+        <tr>
+          <th>Jogador</th>
+          <th>Sport</th>
+          <th>Estatísticas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jogadores of jogadoresEstatisticas"> 
+          <td>{{ jogadores.nome }}</td>
+          <td>{{ jogadores.sport }}</td>
+          <td>{{ jogadores.stats }}</td>                
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
 
-  <table *ngIf="jogadorEstatistica" class="table table-striped">  
-    <thead>
-      <tr>
-        <th>Jogador</th>
-        <th>Sport</th>
-        <th>Estatísticas</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let jogador of jogadorEstatistica"> 
-        <td>{{ jogador.nome }}</td>
-        <td>{{ jogador.sport }}</td>
-        <td>{{ jogador.stats }}</td>                
-      </tr>
-    </tbody>
-  </table> 
-
-  <h2>
-    Cadastrar Novo Jogador
+  <div *ngIf="jogadorEstatistica">
+    <h2>Buscar Estatísticas de Jogador</h2>
     <div class="row">
-      <div class="col-md-4 form-group">
-        <input class="form-control" [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">
+      <div class="col-md-4 form-group">      
+        <input id="nomeJogador" [(ngModel)]="pesquisaJogador" class="form-control" placeholder="Digite o nome do jogador">
       </div>
-      <div class="col-md-4 form-group">
-        <input class="form-control" [(ngModel)]="sport" placeholder="Sport que praticar">
+      <div class="col-md-1 form-group">
+        <button class="btn btn-primary btn-search" (click)="buscarEstatisticasJogador()">Buscar</button>
       </div>
-      <div class="col-md-4 form-group">
-        <input class="form-control" [(ngModel)]="stats" placeholder="Estatisticas">
-      </div>
-      <div class="col-md-12 form-group">
-        <button class="btn btn-success btn-custom" (click)="adicionaJogador()">Cadastrar</button>
-      </div>
-    </div>    
-  </h2> 
+    </div>
+    
+    <table  class="table table-striped">  
+      <thead>
+        <tr>
+          <th>Jogador</th>
+          <th>Sport</th>
+          <th>Estatísticas</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let jogador of jogadorEstatistica"> 
+          <td>{{ jogador.nome }}</td>
+          <td>{{ jogador.sport }}</td>
+          <td>{{ jogador.stats }}</td>                
+        </tr>
+      </tbody>
+    </table> 
+  </div>
+  
 
-  <table class="table table-striped">
+  <div *ngIf="mostrarCadastrarJogador">
+    <h2>
+      Cadastrar Novo Jogador
+      <div class="row">
+        <div class="col-md-4 form-group">
+          <input class="form-control" [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">
+        </div>
+        <div class="col-md-4 form-group">
+          <input class="form-control" [(ngModel)]="sport" placeholder="Sport que praticar">
+        </div>
+        <div class="col-md-4 form-group">
+          <input class="form-control" [(ngModel)]="stats" placeholder="Estatisticas">
+        </div>
+        <div class="col-md-12 form-group">
+          <button class="btn btn-success btn-custom" (click)="adicionaJogador()">Cadastrar</button>
+        </div>
+      </div>    
+    </h2> 
+  </div>
+  
+
+  <table *ngIf="jogadorEstatistica" class="table table-striped">
     <thead>
       <tr>
         <th>Marcas</th>

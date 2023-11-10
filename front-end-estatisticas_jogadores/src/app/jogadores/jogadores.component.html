@@ -2,36 +2,49 @@
   <h2>Listagem de Estatísticas de Jogadores</h2>
   <button class="btn btn-primary btn-custom" (click)="listaEstatisticasTodosJogadores()">Exibir Estatísticas de Todos os Jogadores</button>
 
-  <div *ngIf="jogadoresEstatisticas" class="row">
-    <div *ngFor="let jogadores of jogadoresEstatisticas" class="col-md-4 form-group">
-      <h1>Jogador: {{ jogadores.nome }}</h1>
-      <h2>
-        <p>Sport: {{ jogadores.sport }}</p>
-        <p>Estatísticas: {{ jogadores.stats }}</p>
-      </h2>     
-    </div>
-  </div>
+  <table *ngIf="jogadoresEstatisticas" class="table table-striped">  
+    <thead>
+      <tr>
+        <th>Jogador</th>
+        <th>Sport</th>
+        <th>Estatísticas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jogadores of jogadoresEstatisticas"> 
+        <td>{{ jogadores.nome }}</td>
+        <td>{{ jogadores.sport }}</td>
+        <td>{{ jogadores.stats }}</td>                
+      </tr>
+    </tbody>
+  </table>
 
   <h2>Buscar Estatísticas de Jogador</h2>
   <div class="row">
-    <div class="col-md-6 form-group">
-      <label for="nomeJogador">Nome do Jogador:</label>
+    <div class="col-md-4 form-group">      
       <input id="nomeJogador" [(ngModel)]="pesquisaJogador" class="form-control" placeholder="Digite o nome do jogador">
     </div>
-    <div class="col-md-6 form-group">
+    <div class="col-md-1 form-group">
       <button class="btn btn-primary btn-search" (click)="buscarEstatisticasJogador()">Buscar</button>
     </div>
   </div>
 
-  <div *ngIf="jogadorEstatistica" class="row form-group">
-    <div *ngFor="let jogador of jogadorEstatistica" class="col-md-4 form-group">
-      <h1>Jogador: {{ jogador.nome }}</h1>
-      <h2>
-        <p>Sport: {{ jogador.sport }}</p>
-        <p>Estatísticas: {{ jogador.stats }}</p>
-      </h2>     
-    </div>
-  </div>
+  <table *ngIf="jogadorEstatistica" class="table table-striped">  
+    <thead>
+      <tr>
+        <th>Jogador</th>
+        <th>Sport</th>
+        <th>Estatísticas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let jogador of jogadorEstatistica"> 
+        <td>{{ jogador.nome }}</td>
+        <td>{{ jogador.sport }}</td>
+        <td>{{ jogador.stats }}</td>                
+      </tr>
+    </tbody>
+  </table> 
 
   <h2>
     Cadastrar Novo Jogador
@@ -48,6 +61,23 @@
       <div class="col-md-12 form-group">
         <button class="btn btn-success btn-custom" (click)="adicionaJogador()">Cadastrar</button>
       </div>
-    </div>
-  </h2>
+    </div>    
+  </h2> 
+
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Marcas</th>
+      </tr>
+    </thead>
+    <tbody>
+      <ng-container *ngIf="marcas">
+        <tr *ngFor="let marca of marcas; let i = index" [class.table-light]="i % 2 === 0">
+          <td>{{ marca.nomeMarca }}</td>
+        </tr>
+      </ng-container>
+    </tbody>
+  </table>
+  
+  
 </div>

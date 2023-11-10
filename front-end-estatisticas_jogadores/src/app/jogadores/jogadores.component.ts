@@ -14,10 +14,12 @@ export class JogadoresComponent implements OnInit {
   stats: string = '';
   jogadoresEstatisticas: any;
   jogadorEstatistica: any;
+  marcas: any;
 
   constructor(private compartilhamentoService: CompartilhamentoService) { }
  
   ngOnInit(): void {
+    this.listaMarcas();
   }
 
   listaEstatisticasTodosJogadores() {
@@ -63,6 +65,18 @@ export class JogadoresComponent implements OnInit {
         },
         error: (error) => {
           console.error('Erro ao cadastrar jogador:', error); 
+        }
+      });
+  }
+
+  listaMarcas() {
+    this.compartilhamentoService.listaMarcas()
+      .subscribe({
+        next: (res) => {
+          this.marcas = res; 
+        },
+        error: (error) => {
+          console.error('Erro ao obter marcas', error);
         }
       });
   }

@@ -1,4 +1,16 @@
 {
+  "marcasAosJogadores": [
+    {
+      "id": 1,
+      "idJogador": 1,
+      "idMarca": 1
+    },
+    {
+      "idJogador": 3,
+      "idMarca": 2,
+      "id": 2
+    }
+  ],
   "marcas": [
     {
       "id": 1,

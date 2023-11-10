@@ -9,6 +9,8 @@ export class CompartilhamentoService {
 
   private apiUrlJogadores = 'http://localhost:3000/jogadores';
   private apiUrlMarcas = 'http://localhost:3000/marcas'; 
+  private apiUrlMarcasAosJogadores = 'http://localhost:3000/marcasAosJogadores';
+  
 
   constructor(private http: HttpClient) { }
 
@@ -38,5 +40,10 @@ export class CompartilhamentoService {
 
   adicionaMarca(novaMarca: any): Observable<any> {   
     return this.http.post(this.apiUrlMarcas, novaMarca);
+  }
+
+  // marcas ao jogador  
+  adicionaMarcaAoJogador(novaMarcaAoJogador: any): Observable<any> {   
+    return this.http.post(this.apiUrlMarcasAosJogadores, novaMarcaAoJogador);
   }
 }

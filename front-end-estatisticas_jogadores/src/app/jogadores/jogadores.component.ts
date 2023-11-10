@@ -16,8 +16,10 @@ export class JogadoresComponent implements OnInit {
   jogadorEstatistica: any;
   marcas: any;
   mostrarCadastrarJogador = false;
-
-  
+  mostraMarcasDisponiveis = false;
+  mostraPesquisaJogadorEstatistica = false;
+  mostraMsgJogador404 = false;  
+  jogadorSelecionado = "";
 
   constructor(private compartilhamentoService: CompartilhamentoService) { }
  
@@ -30,8 +32,11 @@ export class JogadoresComponent implements OnInit {
       .subscribe({
         next: (res) => {
           this.jogadoresEstatisticas = res;
+          this.pesquisaJogador = "";
+          this.mostraMarcasDisponiveis = false;
           this.jogadorEstatistica = false;
           this.mostrarCadastrarJogador = false;
+          this.mostraPesquisaJogadorEstatistica = false;
         },
         error: (error) => {
           console.error('Erro ao obter estatísticas de todos os jogadores:', error);
@@ -43,13 +48,16 @@ export class JogadoresComponent implements OnInit {
   {
     this.mostrarCadastrarJogador = false;
     this.jogadoresEstatisticas = false;
-    this.jogadorEstatistica = true;
+    this.mostraPesquisaJogadorEstatistica = true;    
   }
 
   cadastrarNovoJogador()
   {
     this.jogadoresEstatisticas = false;
     this.jogadorEstatistica = false;
+    this.mostraMarcasDisponiveis = false;
+    this.pesquisaJogador = "";
+    this.mostraPesquisaJogadorEstatistica = false;
     this.mostrarCadastrarJogador = true;
   }
 
@@ -58,7 +66,16 @@ export class JogadoresComponent implements OnInit {
       this.compartilhamentoService.listaEstatisticasJogador(this.pesquisaJogador)
         .subscribe({
           next: (res) => {
-            this.jogadorEstatistica = res; 
+            if (res[0])
+            {
+              this.jogadorEstatistica = res;  
+              this.mostraMsgJogador404 = false;
+            }
+            else 
+            {
+              this.mostraMsgJogador404 = true;
+            }
+            
           },
           error: (error) => {
             console.error('Erro ao obter estatísticas do jogador:', error);
@@ -75,17 +92,17 @@ export class JogadoresComponent implements OnInit {
     };
   
     this.compartilhamentoService.adicionaJogador(novoJogador)
-      .subscribe({
-        next: (res) => {       
-          alert('Jogador cadastrado com sucesso.');
-          this.nome_jogador = '';
-          this.sport = '';
-          this.stats = '';
-        },
-        error: (error) => {
-          console.error('Erro ao cadastrar jogador:', error); 
-        }
-      });
+    .subscribe({
+      next: (res) => {       
+        alert('Jogador cadastrado com sucesso.');
+        this.nome_jogador = '';
+        this.sport = '';
+        this.stats = '';
+      },
+      error: (error) => {
+        console.error('Erro ao cadastrar jogador:', error); 
+      }
+    });
   }
 
   listaMarcas() {
@@ -98,6 +115,44 @@ export class JogadoresComponent implements OnInit {
           console.error('Erro ao obter marcas', error);
         }
       });
+  }
+
+  abreMarcasParaJogador(jogador: any)
+  {
+    this.mostraMarcasDisponiveis = true;
+    this.jogadorSelecionado = jogador.nome;
+    localStorage.setItem("jogadorSelecionado", JSON.stringify(jogador));
+    
+  }
+
+  adicionaMarcaAoJogador(marca: any)
+  {
+    const jsonString = localStorage.getItem('jogadorSelecionado');
+
+    if (jsonString)
+    {
+      try {       
+        const jogadorSelecionado = JSON.parse(jsonString);
+
+        const novaMarcaAoJogador = {
+          idJogador: jogadorSelecionado.id,
+          idMarca: marca.id
+        };
+      
+        this.compartilhamentoService.adicionaMarcaAoJogador(novaMarcaAoJogador)
+        .subscribe({
+          next: (res) => {       
+            alert('Marca Cadastrada para o Jogador '+jogadorSelecionado.nome+' com sucesso.');       
+          },
+          error: (error) => {
+            console.error('Erro ao cadastrar marca ao jogador:', error); 
+          }
+        });
+
+      } catch (error) {        
+        console.error('Erro ao fazer o parsing da string JSON:', error);
+      }  
+    }  
   }
 
 }

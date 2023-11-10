@@ -15,8 +15,7 @@ export class JogadoresService {
     return this.http.get(`${this.apiUrl}?name=${jogador}`);
   }
 
-  adicionaJogador(nome_jogador: string): Observable<any> {
-    const dados_jogador = { name: nome_jogador };
-    return this.http.post(this.apiUrl, dados_jogador);
+  adicionaJogador(novoJogador: any): Observable<any> {   
+    return this.http.post(this.apiUrl, novoJogador);
   }
 }

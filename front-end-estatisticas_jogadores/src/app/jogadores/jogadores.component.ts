@@ -9,6 +9,8 @@ import { JogadoresService } from './jogadores.service';
 export class JogadoresComponent implements OnInit {
 
   nome_jogador: string = '';
+  sport: string = '';
+  stats: string = '';
   playerStats: any;
 
   constructor(private jogadoresService: JogadoresService) { }
@@ -26,18 +28,26 @@ export class JogadoresComponent implements OnInit {
         }
       });
   }
-
+  
   adicionaJogador() {
-    this.jogadoresService.adicionaJogador(this.nome_jogador)
+    const novoJogador = {
+      nome: this.nome_jogador,
+      sport: this.sport,
+      stats: this.stats
+    };
+  
+    this.jogadoresService.adicionaJogador(novoJogador)
       .subscribe({
-        next:(res)=>{       
+        next: (res) => {       
           alert('Jogador cadastrado com sucesso.');
           this.nome_jogador = '';
+          this.sport = '';
+          this.stats = '';
         },
-        error:(error)=>{
+        error: (error) => {
           console.error('Erro ao cadastrar jogador:', error); 
         }
-    }) 
+      });
   }
 
 }

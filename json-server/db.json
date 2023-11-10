@@ -1,17 +1,22 @@
 {
-    "jogadores": [
-      {
-        "id": 1,
-        "name": "Stephen Curry",
-        "sport": "NBA",
-        "stats": "Média de 30 pontos por jogo na temporada 2022"
-      },
-      {
-        "id": 2,
-        "name": "Neymar",
-        "sport": "Futebol",
-        "stats": "Marcou 20 gols na temporada 2022"
-      }
-    ]
-  }
-  
+  "jogadores": [
+    {
+      "id": 1,
+      "name": "Stephen Curry",
+      "sport": "NBA",
+      "stats": "Média de 30 pontos por jogo na temporada 2022"
+    },
+    {
+      "id": 2,
+      "name": "Neymar",
+      "sport": "Futebol",
+      "stats": "Marcou 20 gols na temporada 2022"
+    },
+    {
+      "nome": "Lebron James",
+      "sport": "Basketball",
+      "stats": "maior pontuador",
+      "id": 3
+    }
+  ]
+}

@@ -1,4 +1,14 @@
 {
+  "marcas": [
+    {
+      "id": 1,
+      "nomeMarca": "Adidas"
+    },
+    {
+      "nomeMarca": "Nike",
+      "id": 2
+    }
+  ],
   "jogadores": [
     {
       "id": 1,
@@ -17,6 +27,12 @@
       "sport": "Basket",
       "stats": "Maior Pontuador",
       "id": 3
+    },
+    {
+      "nome": "Demar deRozen",
+      "sport": "Basket",
+      "stats": "maior pontuador de 2022",
+      "id": 4
     }
   ]
 }

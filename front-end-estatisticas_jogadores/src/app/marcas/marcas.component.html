@@ -1,0 +1,41 @@
+<div class="container-custom">
+    <h2>Listagem de Marcas</h2>
+    <button class="btn btn-primary btn-custom" (click)="listaMarcas()">Exibir Todas as Marcas</button>
+  
+    <div *ngIf="marcas" class="row">
+      <div *ngFor="let marcas of marcas" class="col-md-4 form-group">
+        <h1>Jogador: {{ marcas.nomeMarca }}</h1>           
+      </div>
+    </div>
+  
+    <h2>Buscar Marca</h2>
+    <div class="row">
+      <div class="col-md-6 form-group">
+        <label for="nomeMarca">Nome da Marca:</label>
+        <input id="nomeJogador" [(ngModel)]="pesquisaMarca" class="form-control" placeholder="Digite o nome da marca">
+      </div>
+      <div class="col-md-6 form-group">
+        <button class="btn btn-primary btn-search" (click)="buscarMarca()">Buscar</button>
+      </div>
+    </div>
+  
+    <div *ngIf="marca" class="row form-group">
+      <div *ngFor="let marca of marca" class="col-md-4 form-group">
+        <h1>Marca: {{ marca.nomeMarca }}</h1>          
+      </div>
+    </div>
+  
+    <h2>
+      Cadastrar Nova Marca
+      <div class="row">
+        <div class="col-md-4 form-group">
+          <input class="form-control" [(ngModel)]="nome_marca" placeholder="Nome da marca">
+        </div>
+        
+        <div class="col-md-12 form-group">
+          <button class="btn btn-success btn-custom" (click)="adicionaMarca()">Cadastrar</button>
+        </div>
+      </div>
+    </h2>
+  </div>
+  

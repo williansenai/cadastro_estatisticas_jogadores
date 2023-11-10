@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { JogadoresService } from './jogadores.service';
+import { CompartilhamentoService } from '../compartilhamento.service';
 
 @Component({
   selector: 'app-jogadores',
@@ -15,16 +15,16 @@ export class JogadoresComponent implements OnInit {
   jogadoresEstatisticas: any;
   jogadorEstatistica: any;
 
-  constructor(private jogadoresService: JogadoresService) { }
+  constructor(private compartilhamentoService: CompartilhamentoService) { }
  
   ngOnInit(): void {
   }
 
   listaEstatisticasTodosJogadores() {
-    this.jogadoresService.listaEstatisticasTodosJogadores()
+    this.compartilhamentoService.listaEstatisticasTodosJogadores()
       .subscribe({
         next: (res) => {
-          this.jogadoresEstatisticas = res; // Assumindo que a resposta contém um array de estatísticas
+          this.jogadoresEstatisticas = res;
         },
         error: (error) => {
           console.error('Erro ao obter estatísticas de todos os jogadores:', error);
@@ -34,7 +34,7 @@ export class JogadoresComponent implements OnInit {
 
   buscarEstatisticasJogador() {
     if (this.pesquisaJogador) {
-      this.jogadoresService.listaEstatisticasJogador(this.pesquisaJogador)
+      this.compartilhamentoService.listaEstatisticasJogador(this.pesquisaJogador)
         .subscribe({
           next: (res) => {
             this.jogadorEstatistica = res; 
@@ -53,7 +53,7 @@ export class JogadoresComponent implements OnInit {
       stats: this.stats
     };
   
-    this.jogadoresService.adicionaJogador(novoJogador)
+    this.compartilhamentoService.adicionaJogador(novoJogador)
       .subscribe({
         next: (res) => {       
           alert('Jogador cadastrado com sucesso.');

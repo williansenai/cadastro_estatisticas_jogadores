@@ -33,19 +33,21 @@
     </div>
   </div>
 
-  <h2>Cadastrar Novo Jogador</h2>
-  <div class="row">
-    <div class="col-md-4 form-group">
-      <input class="form-control" [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">
+  <h2>
+    Cadastrar Novo Jogador
+    <div class="row">
+      <div class="col-md-4 form-group">
+        <input class="form-control" [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">
+      </div>
+      <div class="col-md-4 form-group">
+        <input class="form-control" [(ngModel)]="sport" placeholder="Sport que praticar">
+      </div>
+      <div class="col-md-4 form-group">
+        <input class="form-control" [(ngModel)]="stats" placeholder="Estatisticas">
+      </div>
+      <div class="col-md-12 form-group">
+        <button class="btn btn-success btn-custom" (click)="adicionaJogador()">Cadastrar</button>
+      </div>
     </div>
-    <div class="col-md-4 form-group">
-      <input class="form-control" [(ngModel)]="sport" placeholder="Sport que praticar">
-    </div>
-    <div class="col-md-4 form-group">
-      <input class="form-control" [(ngModel)]="stats" placeholder="Estatisticas">
-    </div>
-    <div class="col-md-12 form-group">
-      <button class="btn btn-success btn-custom" (click)="adicionaJogador()">Cadastrar</button>
-    </div>
-  </div>
+  </h2>
 </div>

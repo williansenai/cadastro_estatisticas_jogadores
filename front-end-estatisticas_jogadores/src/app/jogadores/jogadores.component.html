@@ -20,13 +20,15 @@
           <th>Jogador</th>
           <th>Sport</th>
           <th>Estatísticas</th>
+          <th>Mostrar Marcas</th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor="let jogadores of jogadoresEstatisticas"> 
-          <td>{{ jogadores.nome }}</td>
-          <td>{{ jogadores.sport }}</td>
-          <td>{{ jogadores.stats }}</td>                
+        <tr *ngFor="let jogador of jogadoresEstatisticas"> 
+          <td>{{ jogador.nome }}</td>
+          <td>{{ jogador.sport }}</td>
+          <td>{{ jogador.stats }}</td> 
+          <td><button class="btn btn-info btn-search" (click)="mostrarMarcasDesseJogador(jogador)">Marcas Usadas por {{ jogador.nome }}</button></td>               
         </tr>
       </tbody>
     </table>

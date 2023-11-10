@@ -155,4 +155,9 @@ export class JogadoresComponent implements OnInit {
     }  
   }
 
+  mostrarMarcasDesseJogador(jogador: any)
+  {
+
+  }
+
 }

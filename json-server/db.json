@@ -2,20 +2,20 @@
   "jogadores": [
     {
       "id": 1,
-      "name": "Stephen Curry",
+      "nome": "Stephen Curry",
       "sport": "NBA",
       "stats": "Média de 30 pontos por jogo na temporada 2022"
     },
     {
       "id": 2,
-      "name": "Neymar",
+      "nome": "Neymar",
       "sport": "Futebol",
       "stats": "Marcou 20 gols na temporada 2022"
     },
     {
-      "name": "Lebrom James",
-      "sport": "Basketboll",
-      "stats": "maior pontuador",
+      "nome": "Lebrom James",
+      "sport": "Basket",
+      "stats": "Maior Pontuador",
       "id": 3
     }
   ]

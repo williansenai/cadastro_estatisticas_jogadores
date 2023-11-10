@@ -12,7 +12,8 @@ export class JogadoresComponent implements OnInit {
   nome_jogador: string = '';
   sport: string = '';
   stats: string = '';
-  playerStats: any;
+  jogadoresEstatisticas: any;
+  jogadorEstatistica: any;
 
   constructor(private jogadoresService: JogadoresService) { }
  
@@ -23,7 +24,7 @@ export class JogadoresComponent implements OnInit {
     this.jogadoresService.listaEstatisticasTodosJogadores()
       .subscribe({
         next: (res) => {
-          this.playerStats = res; // Assumindo que a resposta contém um array de estatísticas
+          this.jogadoresEstatisticas = res; // Assumindo que a resposta contém um array de estatísticas
         },
         error: (error) => {
           console.error('Erro ao obter estatísticas de todos os jogadores:', error);
@@ -36,7 +37,7 @@ export class JogadoresComponent implements OnInit {
       this.jogadoresService.listaEstatisticasJogador(this.pesquisaJogador)
         .subscribe({
           next: (res) => {
-            this.playerStats = res; // Assumindo que a resposta contém as estatísticas do jogador
+            this.jogadorEstatistica = res; 
           },
           error: (error) => {
             console.error('Erro ao obter estatísticas do jogador:', error);
@@ -47,7 +48,7 @@ export class JogadoresComponent implements OnInit {
   
   adicionaJogador() {
     const novoJogador = {
-      name: this.nome_jogador,
+      nome: this.nome_jogador,
       sport: this.sport,
       stats: this.stats
     };

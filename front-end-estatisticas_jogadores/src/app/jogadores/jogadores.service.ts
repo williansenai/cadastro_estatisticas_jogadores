@@ -12,7 +12,7 @@ export class JogadoresService {
   constructor(private http: HttpClient) { }
 
   listaEstatisticasJogador(nomeJogador: string): Observable<any> {
-    const url = `${this.apiUrl}?name=${nomeJogador}`;
+    const url = `${this.apiUrl}?nome=${nomeJogador}`;
     return this.http.get(url);
   }
 

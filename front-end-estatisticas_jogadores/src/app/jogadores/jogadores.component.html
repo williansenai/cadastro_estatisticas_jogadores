@@ -1,10 +1,28 @@
-<h1>Stephen Curry - NBA</h1>
-<button (click)="listaEstatisticasJogador('Stephen Curry')">Exibir Estatísticas de Stephen Curry</button>
-<div *ngIf="playerStats">{{ playerStats }}</div>
 
-<h1>Neymar - Futebol</h1>
-<button (click)="listaEstatisticasJogador('Neymar')">Exibir Estatísticas de Neymar</button>
-<div *ngIf="playerStats">{{ playerStats }}</div>
+<h2>Listagem de Estatísticas de Jogadores</h2>
+<button (click)="listaEstatisticasTodosJogadores()">Exibir Estatísticas de Todos os Jogadores</button>
+
+<div *ngIf="playerStats">
+  <div *ngFor="let stats of playerStats">
+    <h1>{{ stats.name }}</h1>
+    <p>Sport: {{ stats.sport }}</p>
+    <p>Estatísticas: {{ stats.stats }}</p>
+    <!-- Adicione outros campos conforme necessário -->
+  </div>
+</div>
+
+
+<h2>Buscar Estatísticas de Jogador</h2>
+<label for="nomeJogador">Nome do Jogador:</label>
+<input id="nomeJogador" [(ngModel)]="pesquisaJogador" placeholder="Digite o nome do jogador">
+<button (click)="buscarEstatisticasJogador()">Buscar</button>
+
+<div *ngIf="playerStats">
+  <h1>{{ playerStats.nome }}</h1>
+  <p>Sport: {{ playerStats.sport }}</p>
+  <p>Estatísticas: {{ playerStats.stats }}</p>
+  
+</div>
 
 <h2>Cadastro</h2>
 <input [(ngModel)]="nome_jogador" placeholder="Nome do Jogador">

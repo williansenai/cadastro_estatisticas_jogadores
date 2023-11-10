@@ -8,6 +8,7 @@ import { JogadoresService } from './jogadores.service';
 })
 export class JogadoresComponent implements OnInit {
 
+  pesquisaJogador: string = '';
   nome_jogador: string = '';
   sport: string = '';
   stats: string = '';
@@ -18,20 +19,35 @@ export class JogadoresComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  listaEstatisticasJogador(jogador: string) {
-    this.jogadoresService.listaEstatisticasJogador(jogador)
-      .subscribe((data) => {
-        if (data.length > 0) {
-          this.playerStats = data[0].stats;
-        } else {
-          this.playerStats = 'Nenhuma estatística encontrada para ' + this.nome_jogador;
+  listaEstatisticasTodosJogadores() {
+    this.jogadoresService.listaEstatisticasTodosJogadores()
+      .subscribe({
+        next: (res) => {
+          this.playerStats = res; // Assumindo que a resposta contém um array de estatísticas
+        },
+        error: (error) => {
+          console.error('Erro ao obter estatísticas de todos os jogadores:', error);
         }
       });
+  }
+
+  buscarEstatisticasJogador() {
+    if (this.pesquisaJogador) {
+      this.jogadoresService.listaEstatisticasJogador(this.pesquisaJogador)
+        .subscribe({
+          next: (res) => {
+            this.playerStats = res; // Assumindo que a resposta contém as estatísticas do jogador
+          },
+          error: (error) => {
+            console.error('Erro ao obter estatísticas do jogador:', error);
+          }
+        });
+    }
   }
   
   adicionaJogador() {
     const novoJogador = {
-      nome: this.nome_jogador,
+      name: this.nome_jogador,
       sport: this.sport,
       stats: this.stats
     };

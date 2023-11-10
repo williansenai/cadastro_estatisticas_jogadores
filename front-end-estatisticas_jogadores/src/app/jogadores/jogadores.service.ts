@@ -11,8 +11,13 @@ export class JogadoresService {
 
   constructor(private http: HttpClient) { }
 
-  listaEstatisticasJogador(jogador: string): Observable<any> {
-    return this.http.get(`${this.apiUrl}?name=${jogador}`);
+  listaEstatisticasJogador(nomeJogador: string): Observable<any> {
+    const url = `${this.apiUrl}?name=${nomeJogador}`;
+    return this.http.get(url);
+  }
+
+  listaEstatisticasTodosJogadores(): Observable<any> {
+    return this.http.get(`${this.apiUrl}`);
   }
 
   adicionaJogador(novoJogador: any): Observable<any> {   

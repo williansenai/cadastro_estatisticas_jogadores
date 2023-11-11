@@ -9,6 +9,16 @@
       "idJogador": 3,
       "idMarca": 2,
       "id": 2
+    },
+    {
+      "idJogador": 3,
+      "idMarca": 3,
+      "id": 3
+    },
+    {
+      "idJogador": 1,
+      "idMarca": 3,
+      "id": 4
     }
   ],
   "marcas": [
@@ -19,6 +29,10 @@
     {
       "nomeMarca": "Nike",
       "id": 2
+    },
+    {
+      "nomeMarca": "Mizuno",
+      "id": 3
     }
   ],
   "jogadores": [

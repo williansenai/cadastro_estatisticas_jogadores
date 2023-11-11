@@ -1,0 +1,6 @@
+/* Adicione isso ao seu estilo do ModalContentComponent */
+:host {
+    display: block;
+    z-index: 1000;
+  }
+  

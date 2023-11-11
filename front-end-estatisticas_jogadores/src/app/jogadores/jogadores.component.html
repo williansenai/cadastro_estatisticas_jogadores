@@ -17,6 +17,7 @@
     <table class="table table-striped">  
       <thead>
         <tr>
+          <th>Id</th>
           <th>Jogador</th>
           <th>Sport</th>
           <th>Estatísticas</th>
@@ -25,10 +26,13 @@
       </thead>
       <tbody>
         <tr *ngFor="let jogador of jogadoresEstatisticas"> 
+          <td>{{ jogador.id }}</td>
           <td>{{ jogador.nome }}</td>
           <td>{{ jogador.sport }}</td>
           <td>{{ jogador.stats }}</td> 
-          <td><button class="btn btn-info btn-search" (click)="mostrarMarcasDesseJogador(jogador)">Marcas Usadas por {{ jogador.nome }}</button></td>               
+          <td><!-- Importe o botão do Angular Material -->
+            <button mat-raised-button color="primary" (click)="listaMarcasDoJogador(jogador)">Mostrar Marcas usadas por {{ jogador.nome }}</button>
+            </td>               
         </tr>
       </tbody>
     </table>
@@ -110,6 +114,31 @@
       </ng-container>
     </tbody>
   </table>
+
+
+  <div *ngIf="mostrarMarcasDoJogadorSelecionado">
+    <h2>Marcas Usadas por {{ jogadorSelecionado }}</h2>
+    <table class="table table-striped">
+      <thead>
+        <tr>
+          <th>Id Jogador</th>
+          <th>Marcas do Jogador</th>
+        </tr>
+      </thead>
+      <tbody>
+        <ng-container *ngIf="marcasDoJogadorSelecionado.length > 0; else semMarcas">
+          <tr *ngFor="let marcaJogador of marcasDoJogadorSelecionado; let i = index" [class.table-light]="i % 2 === 0">
+            <td>{{ marcaJogador.idJogador }}</td>
+            <td>{{ marcaJogador.idMarca }}</td>
+          </tr>
+        </ng-container>
+      </tbody>
+    </table>
+    <ng-template #semMarcas>
+      <p>Nenhuma marca encontrada para o jogador {{ jogadorSelecionado }}</p>
+    </ng-template>
+  </div>
+
   
   
 </div>

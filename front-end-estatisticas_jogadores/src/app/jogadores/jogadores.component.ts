@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CompartilhamentoService } from '../compartilhamento.service';
+import { ModalService } from '../modal.service';
 
 @Component({
   selector: 'app-jogadores',
@@ -20,8 +21,14 @@ export class JogadoresComponent implements OnInit {
   mostraPesquisaJogadorEstatistica = false;
   mostraMsgJogador404 = false;  
   jogadorSelecionado = "";
+  mostrarMarcasDoJogadorSelecionado = false;
 
-  constructor(private compartilhamentoService: CompartilhamentoService) { }
+  marcasDoJogadorSelecionado: any[] = [];
+
+  constructor(
+    private compartilhamentoService: CompartilhamentoService,
+    private modalService: ModalService
+  ) { }
  
   ngOnInit(): void {
     this.listaMarcas();
@@ -37,6 +44,7 @@ export class JogadoresComponent implements OnInit {
           this.jogadorEstatistica = false;
           this.mostrarCadastrarJogador = false;
           this.mostraPesquisaJogadorEstatistica = false;
+          this.mostrarMarcasDoJogadorSelecionado = false;
         },
         error: (error) => {
           console.error('Erro ao obter estatísticas de todos os jogadores:', error);
@@ -48,7 +56,8 @@ export class JogadoresComponent implements OnInit {
   {
     this.mostrarCadastrarJogador = false;
     this.jogadoresEstatisticas = false;
-    this.mostraPesquisaJogadorEstatistica = true;    
+    this.mostrarMarcasDoJogadorSelecionado = false;
+    this.mostraPesquisaJogadorEstatistica = true;
   }
 
   cadastrarNovoJogador()
@@ -58,6 +67,7 @@ export class JogadoresComponent implements OnInit {
     this.mostraMarcasDisponiveis = false;
     this.pesquisaJogador = "";
     this.mostraPesquisaJogadorEstatistica = false;
+    this.mostrarMarcasDoJogadorSelecionado = false;
     this.mostrarCadastrarJogador = true;
   }
 
@@ -155,9 +165,34 @@ export class JogadoresComponent implements OnInit {
     }  
   }
 
-  mostrarMarcasDesseJogador(jogador: any)
+  
+
+  listaMarcasDoJogador(jogador: any) 
   {
+    const idJogador = jogador.id;
 
+    this.compartilhamentoService.listaMarcasDoJogador(idJogador)
+      .subscribe({
+        next: (res: any) => {
+          console.log(res);
+          const marcasAosJogadores = res[0] as any[];
+          const marcas = res[1] as any[];
+
+          // Filtra apenas as marcas relacionadas ao jogador selecionado
+          const marcasDoJogador = marcasAosJogadores
+            .filter(marcaJogador => marcaJogador.idJogador === idJogador)
+            .map(marcaJogador => {
+              const marca = marcas.find(m => m.id === marcaJogador.idMarca);
+              return { idMarca: marca.id, nomeMarca: marca.nomeMarca };
+            });
+
+          this.marcasDoJogadorSelecionado = marcasDoJogador;
+          this.mostrarMarcasDoJogadorSelecionado = true;
+        },
+        error: (error) => {
+          console.error('Erro ao obter marcas do jogador:', error);
+        }
+      });
   }
-
+    
 }

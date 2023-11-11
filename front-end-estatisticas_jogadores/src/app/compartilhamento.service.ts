@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, forkJoin } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -46,4 +46,15 @@ export class CompartilhamentoService {
   adicionaMarcaAoJogador(novaMarcaAoJogador: any): Observable<any> {   
     return this.http.post(this.apiUrlMarcasAosJogadores, novaMarcaAoJogador);
   }
+
+  listaMarcasDoJogador(idJogador: number): Observable<any> {
+    const urlMarcasAosJogadores = `${this.apiUrlMarcasAosJogadores}?idJogador=${idJogador}`;
+    const urlMarcas = `${this.apiUrlMarcas}`;
+
+    // Utiliza o forkJoin para realizar as duas chamadas simultaneamente
+    return forkJoin([
+      this.http.get(urlMarcasAosJogadores),
+      this.http.get(urlMarcas)
+    ]);
+  }  
 }
